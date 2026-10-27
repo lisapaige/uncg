@@ -1,16 +1,8 @@
 # CLAUDE.md
 
-Data repo for UNC Greensboro: crawl configs, crawl/chunk snapshots, eval data.
-No application code. [km-pipeline](https://github.com/lisapaige/km-pipeline)
-produces and consumes this layout; its stage READMEs own the how-to.
-
-## Layout
-
-- `data/crawl/config/<subject>/tree.yaml` — tracked; the scope decisions (whitelist SSOT)
-- `data/crawl/` and `data/chunks/` run outputs — untracked
-- `prompts/` — chunker failcase ledger, prompt vars
-
-Local only: `.env` (workspace API keys).
+What this repo is, layout, local-only rules: [`README.md`](README.md).
+How-to for crawling/chunking: [km-pipeline](https://github.com/lisapaige/km-pipeline)'s
+stage READMEs.
 
 ## Code Standards
 
