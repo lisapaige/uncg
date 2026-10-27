@@ -18,9 +18,11 @@ uv sync
 pre-commit install
 ```
 
-Run a crawl (from a km-pipeline checkout):
+Run a crawl — the commands resolve only inside a km-pipeline checkout
+(this repo does not install km-pipeline):
 
 ```bash
+cd ~/code/km-pipeline
 uv run km-crawl ~/code/uncg/data/crawl/config/general_tracer/tree.yaml --out-dir ~/code/uncg/data/crawl
 uv run km-crawl ~/code/uncg/data/crawl/config/general/tree.yaml --out-dir ~/code/uncg/data/crawl
 ```
