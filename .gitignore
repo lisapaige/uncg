@@ -1,2 +1,12 @@
 .env
 __pycache__/
+*.egg-info/
+dist/
+build/
+.venv
+.envrc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints
+CLAUDE.local.md
+TAHDONELIST.local.md
