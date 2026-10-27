@@ -3,7 +3,10 @@
 # Path: data/crawl/config/general/tree.yaml (uncg data repo)
 #
 # Scope decided 2026-10-26 from data/crawl/general/map/
-# ignore_sitemap_ignore_subdomains.json (4,930 URLs, link-follow, same-host).
+# ignore_sitemap_include_subdomains.json (4,930 URLs, link-follow; 4,929 on
+# www.uncg.edu — include_subdomains still returns ~one host, because /map
+# only sees sibling-host doorways it finds linked, never their interiors.
+# Sibling hosts in scope get their own maps, e.g. map/admissions.uncg.edu/).
 # www.uncg.edu is WordPress with The Events Calendar (tribe_* sitemaps).
 # Tracer: km-pipeline config/higher_ed/uncg/general_tracer (chrome selectors
 # verified on run 2026-10-26T20-41-36Z; sitemap:only confirmed working).
@@ -39,7 +42,7 @@ meta:
   subject: general
   base: https://www.uncg.edu
   crawler: firecrawl
-  generated_from: map/ignore_sitemap_ignore_subdomains.json 2026-10-26
+  generated_from: map/ignore_sitemap_include_subdomains.json 2026-10-26
 
 crawl_groups:
   - parent_url: https://www.uncg.edu/academics-support
