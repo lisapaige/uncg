@@ -1,0 +1,38 @@
+# ==============================================================================
+# tree.yaml — UNCG / general_tracer — TRACER-BULLET config
+# Path: data/crawl/config/general_tracer/tree.yaml (uncg data repo)
+#
+# Page groups rely on km-pipeline's scrape defaults (full-page markdown;
+# the chunker prompt owns noise — no site selectors).
+#
+# Coverage:
+#   enumerate/page -> /about-uncg/why-uncg/mission-vision (small evergreen page)
+#   subtree/page   -> /academics-support (sitemap:only verified live 2026-10-26)
+#
+# resource_kind: document deliberately absent — PDFs aren't in the map; they
+# arrive via the first full run's links.txt harvest.
+# ==============================================================================
+
+meta:
+  vertical: higher_ed
+  instance: uncg
+  subject: general_tracer
+  base: https://www.uncg.edu
+  crawler: firecrawl
+  generated_from: tracer bullet for general
+
+crawl_groups:
+  - parent_url: https://www.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    status: provisional
+    offspring:
+      - about-uncg/why-uncg/mission-vision
+
+  - parent_url: https://www.uncg.edu/academics-support
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options:
+      sitemap: only
+      limit: 5

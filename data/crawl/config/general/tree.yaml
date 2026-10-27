@@ -1,0 +1,98 @@
+# ==============================================================================
+# tree.yaml — UNCG / general — evergreen core only
+# Path: data/crawl/config/general/tree.yaml (uncg data repo)
+#
+# Scope decided 2026-10-26 from data/crawl/general/map/
+# ignore_sitemap_ignore_subdomains.json (4,930 URLs, link-follow, same-host).
+# www.uncg.edu is WordPress with The Events Calendar (tribe_* sitemaps).
+# Tracer: km-pipeline config/higher_ed/uncg/general_tracer (chrome selectors
+# verified on run 2026-10-26T20-41-36Z; sitemap:only confirmed working).
+#
+# IN — evergreen core (~90 mapped URLs):
+#   /academics-support (41), /campus-life-resources (32), /about-uncg (6),
+#   /costs-aid-scholarships (6), /degrees (4), audience gateway pages (4).
+#
+# OUT, deliberately — do not re-add without a scope decision:
+#   directories (2,812): /employees /people — one page per person; roster
+#     content, not KB prose. Needs its own subject + chunking strategy if the
+#     customer wants people search.
+#   news-style posts (~1,900): /news /newsnotes /campus-weekly /featured
+#     /uncategorized /faculty-staff /campus-life /research /arts-culture
+#     /service /alumni-2 /esports /accolade /category — WP post archives;
+#     time-decayed content. Separate subject if ever wanted.
+#   events machinery: /venue /events /events-2 /submit-an-event + tribe_*
+#     — The Events Calendar plugin artifacts; events need an API/feed
+#     collector, not a page crawl.
+#   junk: *-sitemap*.xml /jm-test-page /comments /~rebarton /wp-content /media
+#
+# OPEN (ask the customer; not crawled in v1): /community-partners (9),
+#   /community-connections (3), /racial-equity (2), /athletics-about-uncg (2),
+#   singleton campaign landings (/spark /dream /academic-excellence* etc.),
+#   /campus-map (interactive app — portal candidate), the homepage (nav shell).
+#   External portals not hand-navved yet (crawl README step 3) — no portals:.
+#   resource_kind: document arrives after the first run's links.txt harvest.
+# ==============================================================================
+
+meta:
+  vertical: higher_ed
+  instance: uncg
+  subject: general
+  base: https://www.uncg.edu
+  crawler: firecrawl
+  generated_from: map/ignore_sitemap_ignore_subdomains.json 2026-10-26
+
+crawl_groups:
+  - parent_url: https://www.uncg.edu/academics-support
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options: &uncg_sitemap_crawl
+      sitemap: only   # sitemap verified live by the tracer; map is the orphan backstop
+      limit: 80       # 41 mapped; headroom for sitemap-only pages, not runaway discovery
+  - parent_url: https://www.uncg.edu/campus-life-resources
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options:
+      <<: *uncg_sitemap_crawl
+      limit: 60       # 32 mapped
+  - parent_url: https://www.uncg.edu/about-uncg
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options:
+      <<: *uncg_sitemap_crawl
+      limit: 15       # 6 mapped
+  - parent_url: https://www.uncg.edu/costs-aid-scholarships
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options:
+      <<: *uncg_sitemap_crawl
+      limit: 15       # 6 mapped
+  - parent_url: https://www.uncg.edu/degrees
+    mode: subtree
+    resource_kind: page
+    status: provisional
+    crawl_options:
+      <<: *uncg_sitemap_crawl
+      limit: 10       # 4 mapped; degrees CPT has its own sitemap
+  - parent_url: https://www.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    status: provisional
+    # Firecrawl's branding extractor crashes on /military-affiliated's DOM
+    # (TypeError in extractBrandDesignWithLogoColors, 2026-10-27), failing the
+    # whole scrape. Fetch this group without the branding format;
+    # branding.json lands empty for these four pages.
+    scrape_options:
+      formats: [markdown, links, html, rawHtml]
+    note: >
+      Audience gateway pages — tiny, stable, exact-billed. Deliberately
+      enumerate (no discovery): each links heavily into sections scoped
+      elsewhere or excluded.
+    offspring:
+      - current-students
+      - future-students
+      - international-students
+      - military-affiliated
