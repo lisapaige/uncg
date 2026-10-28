@@ -1,39 +1,14 @@
 # ==============================================================================
-# tree.yaml — UNCG / general — evergreen core only
-# Path: data/crawl/config/general/tree.yaml (uncg data repo)
+# tree.yaml — uncg / general — generated from the census map + scope review
+# Path: data/crawl/config/general/tree.yaml (data repo)
 #
-# Scope decided 2026-10-26 from data/crawl/general/map/
-# ignore_sitemap_include_subdomains.json (4,930 URLs, link-follow; 4,929 on
-# www.uncg.edu — include_subdomains still returns ~one host, because /map
-# only sees sibling-host doorways it finds linked, never their interiors.
-# Sibling hosts in scope get their own maps, e.g. map/admissions.uncg.edu/).
-# www.uncg.edu is WordPress with The Events Calendar (tribe_* sitemaps).
-# Tracer: km-pipeline config/higher_ed/uncg/general_tracer (chrome selectors
-# verified on run 2026-10-26T20-41-36Z; sitemap:only confirmed working).
+# Scope decided 2026-10-28 in the scope-review notebook against
+# map/include_sitemap_include_subdomains.json. Decisions: map/scope_decisions.json —
+# 412 branches: 16 subtree, 68 enumerate, 9 portal, 49 signpost, 270 exclude.
 #
-# IN — evergreen core (~90 mapped URLs):
-#   /academics-support (41), /campus-life-resources (32), /about-uncg (6),
-#   /costs-aid-scholarships (6), /degrees (4), audience gateway pages (4).
-#
-# OUT, deliberately — do not re-add without a scope decision:
-#   directories (2,812): /employees /people — one page per person; roster
-#     content, not KB prose. Needs its own subject + chunking strategy if the
-#     customer wants people search.
-#   news-style posts (~1,900): /news /newsnotes /campus-weekly /featured
-#     /uncategorized /faculty-staff /campus-life /research /arts-culture
-#     /service /alumni-2 /esports /accolade /category — WP post archives;
-#     time-decayed content. Separate subject if ever wanted.
-#   events machinery: /venue /events /events-2 /submit-an-event + tribe_*
-#     — The Events Calendar plugin artifacts; events need an API/feed
-#     collector, not a page crawl.
-#   junk: *-sitemap*.xml /jm-test-page /comments /~rebarton /wp-content /media
-#
-# OPEN (ask the customer; not crawled in v1): /community-partners (9),
-#   /community-connections (3), /racial-equity (2), /athletics-about-uncg (2),
-#   singleton campaign landings (/spark /dream /academic-excellence* etc.),
-#   /campus-map (interactive app — portal candidate), the homepage (nav shell).
-#   External portals not hand-navved yet (crawl README step 3) — no portals:.
-#   resource_kind: document arrives after the first run's links.txt harvest.
+# OPEN — enumerate curation: enumerate groups below carry only each
+#   branch's hub page; the picking pass expands them. Signpost labels
+#   are auto-generated from segments — edit freely.
 # ==============================================================================
 
 meta:
@@ -42,60 +17,1178 @@ meta:
   subject: general
   base: https://www.uncg.edu
   crawler: firecrawl
-  generated_from: map/ignore_sitemap_include_subdomains.json 2026-10-26
+  generated_from: map/include_sitemap_include_subdomains.json + map/scope_decisions.json 2026-10-28
 
 crawl_groups:
-  - parent_url: https://www.uncg.edu/academics-support
-    mode: subtree
-    resource_kind: page
-    status: provisional
-    crawl_options: &uncg_sitemap_crawl
-      sitemap: only   # sitemap verified live by the tracer; map is the orphan backstop
-      limit: 80       # 41 mapped; headroom for sitemap-only pages, not runaway discovery
-  - parent_url: https://www.uncg.edu/campus-life-resources
-    mode: subtree
-    resource_kind: page
-    status: provisional
-    crawl_options:
-      <<: *uncg_sitemap_crawl
-      limit: 60       # 32 mapped
-  - parent_url: https://www.uncg.edu/about-uncg
-    mode: subtree
-    resource_kind: page
-    status: provisional
-    crawl_options:
-      <<: *uncg_sitemap_crawl
-      limit: 15       # 6 mapped
-  - parent_url: https://www.uncg.edu/costs-aid-scholarships
-    mode: subtree
-    resource_kind: page
-    status: provisional
-    crawl_options:
-      <<: *uncg_sitemap_crawl
-      limit: 15       # 6 mapped
+  # --- subtrees: whole branches, sitemap-bounded (limit = 1.5 x census) ---
   - parent_url: https://www.uncg.edu/degrees
     mode: subtree
     resource_kind: page
-    status: provisional
     crawl_options:
-      <<: *uncg_sitemap_crawl
-      limit: 10       # 4 mapped; degrees CPT has its own sitemap
+      sitemap: only          # census: 458 URLs
+      limit: 687
+  - parent_url: https://vpa.uncg.edu/music
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 169 URLs
+      limit: 254
+  - parent_url: https://vpa.uncg.edu/theatre
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 84 URLs
+      limit: 126
+  - parent_url: https://vpa.uncg.edu/art
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 55 URLs
+      limit: 83
+  - parent_url: https://admissions.uncg.edu/admissions
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 52 URLs
+      limit: 78
+  - parent_url: https://www.uncg.edu/academics-support
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 41 URLs
+      limit: 62
+  - parent_url: https://vpa.uncg.edu/dance
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 38 URLs
+      limit: 57
+  - parent_url: https://www.uncg.edu/campus-life-resources
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 32 URLs
+      limit: 48
+  - parent_url: https://soe.uncg.edu/ced
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 14 URLs
+      limit: 21
+  - parent_url: https://nursing.uncg.edu/academic-programs
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 10 URLs
+      limit: 15
+  - parent_url: https://soe.uncg.edu/elc
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 10 URLs
+      limit: 15
+  - parent_url: https://soe.uncg.edu/rdi
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 8 URLs
+      limit: 12
+  - parent_url: https://soe.uncg.edu/tehe
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 6 URLs
+      limit: 9
+  - parent_url: https://vpa.uncg.edu/cvpa-home
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 6 URLs
+      limit: 9
+  - parent_url: https://www.uncg.edu/about-uncg
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 6 URLs
+      limit: 9
+  - parent_url: https://www.uncg.edu/costs-aid-scholarships
+    mode: subtree
+    resource_kind: page
+    crawl_options:
+      sitemap: only          # census: 6 URLs
+      limit: 9
+
+  # --- enumerate hubs: one offspring per in-scope branch; curation expands ---
+  - parent_url: https://admissions.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "education-at-work"
+  - parent_url: https://advance.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "career-life"
+      - "research"
+      - "resources"
+  - parent_url: https://bryan.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "programs"
+  - parent_url: https://catalog.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "arts-sciences"
+  - parent_url: https://cpd.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "career-ready"
+  - parent_url: https://genetic-counseling.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "programs"
+  - parent_url: https://gerontology.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "about"
+  - parent_url: https://global.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "funding"
+  - parent_url: https://grs.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "the-graduate-school-unc-greensboro"
+  - parent_url: https://jtccp.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "what-to-do"
+      - "who-we-are"
+  - parent_url: https://learningspaces.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "School-of-Education"
+  - parent_url: https://mathstats.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "statistics-reu"
+  - parent_url: https://nursing.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "about"
+      - "research"
+      - "student-resources"
+      - "unc-greensboro-school-of-nursing-dean-debra-j-barksdale-assumes-the-presidency-of-the-american-academy-of-nursing"
+      - "welcome-from-dean-barksdale"
+  - parent_url: https://policy.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "university_policies"
+  - parent_url: https://psy.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "clinic"
+  - parent_url: https://recwell.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "outdoor-adventures"
+  - parent_url: https://soe.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "accreditation"
+      - "departments-programs"
+      - "leadership"
+      - "oss"
+      - "programs"
+      - "ses"
+      - "soe-cares"
+      - "soe-scholarships-funding"
+      - "soeglobal"
+      - "why-choose-the-school-of-education"
+  - parent_url: https://spartancentral.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "cohort-default-rate"
+      - "financial-aid"
+      - "graduation"
+      - "registration-degree-planning"
+      - "student-records"
+      - "student-resources"
+      - "tuition-billing-payments"
+  - parent_url: https://uc.uncg.edu
+    mode: enumerate
+    resource_kind: page
+    offspring:
+      - "marketing-advertising"
+      - "media-relations"
+      - "photography-services"
+      - "publications"
+      - "social-media"
   - parent_url: https://www.uncg.edu
     mode: enumerate
     resource_kind: page
-    status: provisional
-    # Firecrawl's branding extractor crashes on /military-affiliated's DOM
-    # (TypeError in extractBrandDesignWithLogoColors, 2026-10-27), failing the
-    # whole scrape. Fetch this group without the branding format;
-    # branding.json lands empty for these four pages.
-    scrape_options:
-      formats: [markdown, links, html, rawHtml]
-    note: >
-      Audience gateway pages — tiny, stable, exact-billed. Deliberately
-      enumerate (no discovery): each links heavily into sections scoped
-      elsewhere or excluded.
     offspring:
-      - current-students
-      - future-students
-      - international-students
-      - military-affiliated
+      - "academic-excellence"
+      - "access-to-opportunities"
+      - "athletics-about-uncg"
+      - "campus-map"
+      - "current-students"
+      - "future-students"
+      - "high-rises"
+      - "international-students"
+      - "philanthropy-and-partners"
+      - "reputation-and-awareness"
+      - "research-and-impact"
+      - "soccer"
+      - "student-recruitment"
+      - "uncg-mobile"
+
+portals:
+  - url: https://admissions.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://advance.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://gradapply.uncg.edu/portal
+  - url: https://nursing.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://soe.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://soe.uncg.edu/give
+  - url: https://spartancentral.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://spartancentral.uncg.edu/forms
+  - url: https://spartancentral.uncg.edu/spartan-central-contact-form
+  - url: https://swk.uncg.edu/undergraduate
+  - url: https://uc.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://uc.uncg.edu/contact-us
+  - url: https://uc.uncg.edu/top-five
+  - url: https://vpa.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://www.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
+  - url: https://www.uncg.edu/comments
+  - url: https://www.uncg.edu/submit-an-event
+
+signposts:
+  - url: https://catalog.uncg.edu
+    label: "Catalog"
+  - url: https://jtccp.uncg.edu/event
+    label: "Event"
+  - url: https://jtccp.uncg.edu/events
+    label: "Events"
+  - url: https://nursing.uncg.edu/event
+    label: "Event"
+  - url: https://nursing.uncg.edu/events
+    label: "Events"
+  - url: https://nursing.uncg.edu/practice-community-engagement
+    label: "Practice Community Engagement"
+  - url: https://nursing.uncg.edu/venue
+    label: "Venue"
+  - url: https://soe.uncg.edu/deans-office-directory
+    label: "Deans Office Directory"
+  - url: https://soe.uncg.edu/event
+    label: "Event"
+  - url: https://soe.uncg.edu/events
+    label: "Events"
+  - url: https://soe.uncg.edu/faculty-staff-resources
+    label: "Faculty Staff Resources"
+  - url: https://soe.uncg.edu/organizer
+    label: "Organizer"
+  - url: https://soe.uncg.edu/soe-directory
+    label: "Soe Directory"
+  - url: https://soe.uncg.edu/venue
+    label: "Venue"
+  - url: https://spartancentral.uncg.edu/enrollment-events
+    label: "Enrollment Events"
+  - url: https://spartancentral.uncg.edu/event
+    label: "Event"
+  - url: https://uc.uncg.edu/brand-guide
+    label: "Brand Guide"
+  - url: https://uc.uncg.edu/digital-downloads
+    label: "Digital Downloads"
+  - url: https://uc.uncg.edu/event
+    label: "Event"
+  - url: https://uc.uncg.edu/resources-and-downloads
+    label: "Resources And Downloads"
+  - url: https://www.uncg.edu/accolade
+    label: "Accolade"
+  - url: https://www.uncg.edu/alumni-2
+    label: "Alumni 2"
+  - url: https://www.uncg.edu/alumni-giving
+    label: "Alumni Giving"
+  - url: https://www.uncg.edu/arts-culture
+    label: "Arts Culture"
+  - url: https://www.uncg.edu/author
+    label: "Author"
+  - url: https://www.uncg.edu/campus-life
+    label: "Campus Life"
+  - url: https://www.uncg.edu/campus-weekly
+    label: "Campus Weekly"
+  - url: https://www.uncg.edu/community-connections
+    label: "Community Connections"
+  - url: https://www.uncg.edu/community-partners
+    label: "Community Partners"
+  - url: https://www.uncg.edu/directory
+    label: "Directory"
+  - url: https://www.uncg.edu/employees
+    label: "Employees"
+  - url: https://www.uncg.edu/esports
+    label: "Esports"
+  - url: https://www.uncg.edu/event
+    label: "Event"
+  - url: https://www.uncg.edu/events
+    label: "Events"
+  - url: https://www.uncg.edu/faculty-staff
+    label: "Faculty Staff"
+  - url: https://www.uncg.edu/featured
+    label: "Featured"
+  - url: https://www.uncg.edu/higher-education-emergency-relief-fund-reporting
+    label: "Higher Education Emergency Relief Fund Reporting"
+  - url: https://www.uncg.edu/media
+    label: "Media"
+  - url: https://www.uncg.edu/military-affiliated
+    label: "Military Affiliated"
+  - url: https://www.uncg.edu/news
+    label: "News"
+  - url: https://www.uncg.edu/newsnotes
+    label: "Newsnotes"
+  - url: https://www.uncg.edu/organizer
+    label: "Organizer"
+  - url: https://www.uncg.edu/people
+    label: "People"
+  - url: https://www.uncg.edu/racial-equity
+    label: "Racial Equity"
+  - url: https://www.uncg.edu/research
+    label: "Research"
+  - url: https://www.uncg.edu/series
+    label: "Series"
+  - url: https://www.uncg.edu/service
+    label: "Service"
+  - url: https://www.uncg.edu/uncategorized
+    label: "Uncategorized"
+  - url: https://www.uncg.edu/venue
+    label: "Venue"
+
+excluded:
+  - url: https://admissions.uncg.edu/amazon-career-choice/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://admissions.uncg.edu/wp-content/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://fac.uncg.edu/fm/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://home.uncg.edu/~jwjones/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://its.uncg.edu/tag/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://its.uncg.edu/yuja-panorama-available-in-canvas-oct-14-2026/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://jtccp.uncg.edu/what-to-know/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/category/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/series/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/uncg-nursing-faculty-lead-innovation-in-open-educational-resources/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/uncg-school-of-nursing-honored-at-the-nln-2026-centers-of-excellence-award-ceremony/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/uncg-school-of-nursing-partners-with-solventum-for-exclusive-nursing-student-medical-device-pilot-training-program/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/wp-content/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/10-trends-shaping-student-affairs-today/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/2026-smiley-award-bestowed-upon-moradi-sun/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/a-comprehensive-social-emotional-learning-sel-initiative-at-denton-elementary-school-in-davidson-county/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/a-legacy-of-literacy-the-teagues-gift-continues-to-open-doors/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/about/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/academic-support-hub/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/addressing-faith-and-identity-in-student-support/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/aera-volume-co-edited-by-dr-marcia-rock-reimagines-special-education-workforce/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ahmed-named-recipient-of-short-endowed-fellowship-in-education/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/alana-martinez-finds-her-calling-in-school-counseling-at-uncg/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/alumni-all-access-a-conversation-with-dr-morgan-chitiyo-interim-dean-of-the-school-of-education/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/apa-fellowships-empower-doctoral-students-to-advance-culturally-responsive-mental-health-care/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/book-club-at-the-moss-street-partnership-school/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/bridging-gaps-empowering-trauma-informed-counseling-in-underserved-communities/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/brocks-critical-conversations-conference-engages-educators-and-community/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/building-connections-ipies-reach-expands-across-triad-region/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/building-connections-ipies-reach-expands-across-triad-region-2/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/call-for-nominations-iti-paula-and-rick-short-graduate-student-innovation-fellowship/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/cardboard-robot-parade-documentary-featured-in-north-carolina-film-festival/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/category/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/closing-the-homework-gap-among-residents-of-cleveland-pike-area-of-westminster-s-c/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/college-whats-the-best-fit-for-me/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/congratulations-to-our-graduates/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/culture-and-climate/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/developing-educators-through-microcourses/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/doctoral-student-hilary-flint-recipient-of-nbcc-fellowship/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/dr-amanda-giordano-credits-ced-vacc-clinic-for-her-career-success/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/education-exchange-program-connects-uncg-students-with-german-educators/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/elc-holds-successful-critical-conversations-conference/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/elc-welcomes-participants-for-seventh-critical-conversations-conference/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/elementary-students-enhance-social-studies-learning-with-stem-activities/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/enacted-and-ignite-provide-support-to-gcs-teacher-of-the-year/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/erm-students-present-at-canadian-evaluation-societys-2022-conference/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/find-your-stem-shape-your-future-camp-inspires-middle-school-girls-at-uncg/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/from-the-classroom-to-the-community/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/gcs-uncg-partnership-receives-national-award/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/greensboro-community-able-to-benefit-from-vacc-clinic-as-services-expand/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/growing-multilingual-classrooms-across-north-carolina/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/guilford-county-schools-begin-2nd-year-with-girls-who-game/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/happy-holidays-from-ipie/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/how-students-learn-social-studies/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/idea-student-goes-abroad-to-learn-in-siena-italy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ilrs/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/improving-practice-through-collective-inquiry/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/internal-support-critical-to-success-of-ipie/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ipie-hosts-brown-bag-event-about-collaborative-research-with-school-districts/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ipie-partner-asheboro-city-schools-to-graduate-first-class-of-teach-program/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ipie-presents-at-aacte-2025-annual-meeting/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/karena-zhang-mat-tesol-active-in-growth-of-states-mandarin-teaching/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/kochmanski-featured-on-ncsm-podcast/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/latinx-mental-health-kits/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/leading-through-change-a-guide-for-department-chairs/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/mapping-vaccine-discourse-through-data/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/mccaskill-ho-selected-as-2024-smiley-award-recipients/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-delma-ramos/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-jamie-schissel/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-jennifer-niles/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-kyung-yong-kim/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-lalenja-harrington/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-marcie-rock/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-noah-lenstra/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-rebecca-mathews/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-tiffanie-lewis-durham/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-tolulope-sulaimon/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-dr-vicki-jacobs/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/meet-the-researcher-faith-rice/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/mingfeng-xue-schoolwide-bullying-sel/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/navigating-the-ethical-dilemmas-of-generative-ai/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/paper-by-ramos-tehe-students-earns-honor/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/pe3-event/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/predicting-multicultural-self-efficacy-in-school-counseling/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/program-highlight-mst2-student-graduates-uncg-with-daughter/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/public-libraries-as-partners-in-health-promotion/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/representation-matters-adoption-in-picturebooks/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/school-counseling-student-emanuel-smith-looks-to-build-trust-one-conversation-at-a-time/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/school-of-education-news-archive/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/school-of-educations-online-masters-programs-remain-high-in-rankings/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/short-fellowship-awarded-to-h-blake-lee/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/smiley-award-nomination-window-now-open/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/soe-alums-recognized-by-guilford-county-schools/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/soe-announces-newest-class-of-inspirational-educators/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/soe-conferences-speaker-series/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/soe-faculty-and-doctoral-students-honored-with-international-award-for-evaluation-research/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/soe-strategic-plan/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/sparking-a-love-of-reading-at-greenwood-elementary-school-in-lee-county/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-abigail-hartley/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-adrianna-fields/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-cameron-davis/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-diego-mureno/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-grady-dupree-isaac/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-julia-gilmour/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-katelyn-cruthirds/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-leila-lovell/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-sawyer-wemyss/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-skylar-sumrell/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-stephanie-moretz/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-syneece-forbes/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/spartan-voices-yana-gaitan/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/storytime-to-go-in-hillsborough-nc/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/strengthening-futures-the-partnership-between-uncg-and-asheboro-city-schools-dual-enrollment-program/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/tag/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/tan-works-to-reach-children-families-with-stem-education/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/telling-their-stories-mlis-student-documents-the-aftermath-of-helene/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/together-we-can-improve-practice-and-advance-educational-equity/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/trio-of-students-recognized-with-uncg-soes-smiley-award/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/tutoring-collaborative-presents-at-ncacte/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/u-s-news-world-report-continues-to-rank-school-of-education-ced-ilrs-among-nations-best/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/u-s-news-world-report-rank-graduate-education-counseling-programs-among-nations-best/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/unc-greensboro-names-dr-morgan-chitiyo-as-new-dean-of-the-school-of-education/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/uncg-alumna-dr-lori-kniffin-earns-early-career-award-for-service-learning-research/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/uncg-school-of-education-dean-morgan-chitiyo-receives-africa-leadership-award/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/uncg-wsfcs-partnership-presents-at-ncare/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/wp-content/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/ws-fcs-receives-49422-grant-in-partnership-with-ipie/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://soe.uncg.edu/yopp-distinguished-speaker-series-in-mathematics-education-amanda-jansen-2020/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartancentral.uncg.edu/consumer-information/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartancentral.uncg.edu/form-test/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartancentral.uncg.edu/jm-test-page/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartancentral.uncg.edu/test/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartancentral.uncg.edu/wp-content/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://spartantalent.uncg.edu/postings/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/craig-test/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/folk-fest-giveaway/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/form-to-power-automate-mj/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/mentoring-monday-giveaway/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/unc-system-news/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uc.uncg.edu/uncg-giveaway/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://uncg.edu/~rebarton/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu
+    # root row = the homepage only; a prefix here would claim the whole host
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/2025-generative-ai-conference/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/accessibility-and-your-classroom/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/active-learning/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/building-community-in-class/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/combatting-disengagement/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/communication-well-being-and-student-contact/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/connecting-students-to-beauty-and-wonder/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/course-accessibility/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/course-accessibility-checklists-and-support/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/creative-assessments/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/creative-assessments-2/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/encouraging-students-to-learn-how-to-learn/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/evaluation-isnt-just-for-the-end-of-the-semester/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/event/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/example-exemplar-activity/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/feedback-and-reflection/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/final-assessment-tips/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/generative-ai-use/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/graduate-teaching-assistant-training-resources/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/growth-mindsets/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/home/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/human-intelligence/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/implicit-bias/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/incomplete-grades/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/indigenous-pedagogy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/join-the-uncg-gta-network/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/make-learning-work-for-students/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/making-course-content-accessible/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/mid-semester-feedback/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/midterm-grades/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/midterm-grades-2/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/moons-model-for-reflective-learning/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/moving-students-from-listening-to-learning/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/new-teaching-tools/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/office-hours/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/preparing-students-for-midterms/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/reflection-and-teaching-effectiveness/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/resources-for-better-assessment/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/rethinking-pdfs-in-the-age-of-accessibility/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/series/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-1-lgbtq-identities-in-the-classroom/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-10-international-students/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-11-male-student-experiences/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-12-military-affiliated-students/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-13-financial-aid-and-edi/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-14-edi-and-wellness/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-15-introducing-a-second-host-for-series-nodia-mena/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-16-edi-and-career-preparation/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-17-edi-work-between-higher-ed-and-the-community/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-18-inclusivity-of-families-formed-through-adoption/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-19-re-imagining-the-life-of-equity-through-a-black-feminist-lens/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-2-racial-battle-fatigue/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-20-the-intersection-of-research-teaching-and-edi/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-21-teaching-museums-can-foster-dialogue-and-engagement-around-edi/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-22-the-intersection-of-edi-and-artificial-intelligence/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-23-edi-conversations-around-generative-ai/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-3-indigenous-pedagogy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-4-accessibility-and-accommodations/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-5-black-student-experiences/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-6-higher-education-experiences-of-our-hispanic-and-latinx-students/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-7-asian-asian-american-pacific-islander-students/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-8-sense-of-belonging/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/small-steps-big-impact-episode-9-power-language-in-practice/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/student-voice-and-midterm-feedback/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/syllabus-tips/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-and-hindu-holidays/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-and-jewish-holidays/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-during-and-post-election/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tip-end-of-semester-reflection/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-02-28-2023/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-03-14-2023/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-09-05-2023/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-academic-integrity-and-student-expectations/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-accessibility/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-building-classroom-community/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-chatgpt-and-generative-ai/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-community-guidelines/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-concept-maps/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-connections-and-sense-of-belonging-on-campus/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-finding-your-why/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-fostering-empathy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-fostering-expert-learners-through-udl/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-generative-ai-tips-fall-2023/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-group-work/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-important-reminders-for-the-start-of-the-semester/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-inclusive-language-guide/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-inclusive-teaching-toolkit/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-international-education-week/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-jewish-high-holiday-season/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-mental-health/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-mic-up-for-accessibility/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-mid-semester-feedback/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-mid-semester-feedback-neurodiversity/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-midterm-grades/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-motivating-students-through-goal-setting/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-neurodiverse-students-voises-panel/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-no-reason-to-reinvent-the-wheel/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-open-educational-resources/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-reflections-on-indigenous-pedagogy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-revisiting-class-assignments/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-skills-and-drills-practice-strategy/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-starting-the-semester-off-strong/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-student-focus-group-summary-and-making-space-for-conversation/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-student-learning-retention/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-supporting-jewish-students-during-theur-holiday-season/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-veteran-and-military-affiliated-student-experiences-voises-summary/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-what-is-udl-beyond-technological-access/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/teaching-tips-when-learning-feels-spooky/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/tips-for-teaching-large-classes/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/trauma-informed-teaching-and-natural-disasters/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/universal-design-for-learning-udl/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/using-teams-in-the-classroom/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/who-benefits-when-we-use-universal-design-for-learning-and-what-is-the-cost/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/wise-feedback/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://utlc.uncg.edu/womens-history-month/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://vpa.uncg.edu/wp-content/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/academic-excellence-2025/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/campus-weekly-archive/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/category/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/dream/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/events-2/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/honors-student-chose-wisely/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/jm-test-page/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/spark/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/spartan-success/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/tag/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/terms-of-use/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://www.uncg.edu/wprss_feed_categories/
+    match: prefix
+    reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/home
+    reason: superseded
+    note: redirects to https://nursing.uncg.edu, kept as the portal entry

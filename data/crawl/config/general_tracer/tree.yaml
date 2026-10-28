@@ -5,9 +5,11 @@
 # Page groups rely on km-pipeline's scrape defaults (full-page markdown;
 # the chunker prompt owns noise — no site selectors).
 #
-# Coverage:
+# Coverage (every mechanism the v2 general config uses):
 #   enumerate/page -> /about-uncg/why-uncg/mission-vision (small evergreen page)
 #   subtree/page   -> /academics-support (sitemap:only verified live 2026-10-26)
+#   portal         -> catalog.uncg.edu (doorway page scrape)
+#   signpost       -> /directory (zero-credit; proves signposts.json lands)
 #
 # resource_kind: document deliberately absent — PDFs aren't in the map; they
 # arrive via the first full run's links.txt harvest.
@@ -36,3 +38,10 @@ crawl_groups:
     crawl_options:
       sitemap: only
       limit: 5
+
+portals:
+  - url: https://catalog.uncg.edu
+
+signposts:
+  - url: https://www.uncg.edu/directory
+    label: Campus Directory
