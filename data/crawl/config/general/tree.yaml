@@ -805,8 +805,8 @@ excluded:
   - url: https://uncg.edu/~rebarton/
     match: prefix
     reason: out-of-scope (scope review 2026-10-28)
-  - url: https://utlc.uncg.edu//
-    match: prefix
+  - url: https://utlc.uncg.edu
+    # root row = the homepage only; a prefix here would claim the whole host
     reason: out-of-scope (scope review 2026-10-28)
   - url: https://utlc.uncg.edu/2025-generative-ai-conference/
     match: prefix
