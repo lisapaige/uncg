@@ -1,16 +1,14 @@
 # ==============================================================================
-# tree.yaml — UNCG / general — v2, from the census map + scope review
-# Path: data/crawl/config/general/tree.yaml (uncg data repo)
+# tree.yaml — uncg / general — generated from the census map + scope review
+# Path: data/crawl/config/general/tree.yaml (data repo)
 #
-# Scope decided 2026-10-28 in map/scope_review.ipynb against
-# map/include_sitemap_include_subdomains.json (9,639 URLs, sitemap mode,
-# reproducible ±2). Decisions: map/scope_decisions.json — 412 branches:
-# 16 subtree, 68 enumerate, 9 portal, 49 signpost, 270 exclude.
+# Scope decided 2026-10-28 in the scope-review notebook against
+# map/include_sitemap_include_subdomains.json. Decisions: map/scope_decisions.json —
+# 412 branches: 16 subtree, 68 enumerate, 9 portal, 49 signpost, 270 exclude.
 #
 # OPEN — enumerate curation: enumerate groups below carry only each
-#   branch's hub page; the picking pass (enumerate-picker notebook)
-#   expands them. Signpost labels are auto-generated from segments —
-#   edit freely.
+#   branch's hub page; the picking pass expands them. Signpost labels
+#   are auto-generated from segments — edit freely.
 # ==============================================================================
 
 meta:
