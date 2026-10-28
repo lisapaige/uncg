@@ -123,142 +123,142 @@ crawl_groups:
     mode: enumerate
     resource_kind: page
     offspring:
-      - education-at-work
+      - "education-at-work"
   - parent_url: https://advance.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - career-life
-      - research
-      - resources
+      - "career-life"
+      - "research"
+      - "resources"
   - parent_url: https://bryan.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - programs
+      - "programs"
   - parent_url: https://catalog.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - arts-sciences
+      - "arts-sciences"
   - parent_url: https://cpd.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - career-ready
+      - "career-ready"
   - parent_url: https://genetic-counseling.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - programs
+      - "programs"
   - parent_url: https://gerontology.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - about
+      - "about"
   - parent_url: https://global.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - funding
+      - "funding"
   - parent_url: https://grs.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - the-graduate-school-unc-greensboro
+      - "the-graduate-school-unc-greensboro"
   - parent_url: https://jtccp.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - what-to-do
-      - who-we-are
+      - "what-to-do"
+      - "who-we-are"
   - parent_url: https://learningspaces.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - School-of-Education
+      - "School-of-Education"
   - parent_url: https://mathstats.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - statistics-reu
+      - "statistics-reu"
   - parent_url: https://nursing.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - about
-      - home
-      - research
-      - student-resources
-      - unc-greensboro-school-of-nursing-dean-debra-j-barksdale-assumes-the-presidency-of-the-american-academy-of-nursing
-      - welcome-from-dean-barksdale
+      - "about"
+      - "home"
+      - "research"
+      - "student-resources"
+      - "unc-greensboro-school-of-nursing-dean-debra-j-barksdale-assumes-the-presidency-of-the-american-academy-of-nursing"
+      - "welcome-from-dean-barksdale"
   - parent_url: https://policy.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - university_policies
+      - "university_policies"
   - parent_url: https://psy.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - clinic
+      - "clinic"
   - parent_url: https://recwell.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - outdoor-adventures
+      - "outdoor-adventures"
   - parent_url: https://soe.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - accreditation
-      - departments-programs
-      - leadership
-      - oss
-      - programs
-      - ses
-      - soe-cares
-      - soe-scholarships-funding
-      - soeglobal
-      - why-choose-the-school-of-education
+      - "accreditation"
+      - "departments-programs"
+      - "leadership"
+      - "oss"
+      - "programs"
+      - "ses"
+      - "soe-cares"
+      - "soe-scholarships-funding"
+      - "soeglobal"
+      - "why-choose-the-school-of-education"
   - parent_url: https://spartancentral.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - cohort-default-rate
-      - financial-aid
-      - graduation
-      - registration-degree-planning
-      - student-records
-      - student-resources
-      - tuition-billing-payments
+      - "cohort-default-rate"
+      - "financial-aid"
+      - "graduation"
+      - "registration-degree-planning"
+      - "student-records"
+      - "student-resources"
+      - "tuition-billing-payments"
   - parent_url: https://uc.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - marketing-advertising
-      - media-relations
-      - photography-services
-      - publications
-      - social-media
+      - "marketing-advertising"
+      - "media-relations"
+      - "photography-services"
+      - "publications"
+      - "social-media"
   - parent_url: https://www.uncg.edu
     mode: enumerate
     resource_kind: page
     offspring:
-      - academic-excellence
-      - access-to-opportunities
-      - athletics-about-uncg
-      - campus-map
-      - current-students
-      - future-students
-      - high-rises
-      - international-students
-      - philanthropy-and-partners
-      - reputation-and-awareness
-      - research-and-impact
-      - soccer
-      - student-recruitment
-      - uncg-mobile
+      - "academic-excellence"
+      - "access-to-opportunities"
+      - "athletics-about-uncg"
+      - "campus-map"
+      - "current-students"
+      - "future-students"
+      - "high-rises"
+      - "international-students"
+      - "philanthropy-and-partners"
+      - "reputation-and-awareness"
+      - "research-and-impact"
+      - "soccer"
+      - "student-recruitment"
+      - "uncg-mobile"
 
 portals:
   - url: https://admissions.uncg.edu  # homepage — nav-shell doorway (enumerate cannot express a root)
@@ -281,103 +281,103 @@ portals:
 
 signposts:
   - url: https://catalog.uncg.edu
-    label: Catalog
+    label: "Catalog"
   - url: https://jtccp.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://jtccp.uncg.edu/events
-    label: Events
+    label: "Events"
   - url: https://nursing.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://nursing.uncg.edu/events
-    label: Events
+    label: "Events"
   - url: https://nursing.uncg.edu/practice-community-engagement
-    label: Practice Community Engagement
+    label: "Practice Community Engagement"
   - url: https://nursing.uncg.edu/venue
-    label: Venue
+    label: "Venue"
   - url: https://soe.uncg.edu/deans-office-directory
-    label: Deans Office Directory
+    label: "Deans Office Directory"
   - url: https://soe.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://soe.uncg.edu/events
-    label: Events
+    label: "Events"
   - url: https://soe.uncg.edu/faculty-staff-resources
-    label: Faculty Staff Resources
+    label: "Faculty Staff Resources"
   - url: https://soe.uncg.edu/organizer
-    label: Organizer
+    label: "Organizer"
   - url: https://soe.uncg.edu/soe-directory
-    label: Soe Directory
+    label: "Soe Directory"
   - url: https://soe.uncg.edu/venue
-    label: Venue
+    label: "Venue"
   - url: https://spartancentral.uncg.edu/enrollment-events
-    label: Enrollment Events
+    label: "Enrollment Events"
   - url: https://spartancentral.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://uc.uncg.edu/brand-guide
-    label: Brand Guide
+    label: "Brand Guide"
   - url: https://uc.uncg.edu/digital-downloads
-    label: Digital Downloads
+    label: "Digital Downloads"
   - url: https://uc.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://uc.uncg.edu/resources-and-downloads
-    label: Resources And Downloads
+    label: "Resources And Downloads"
   - url: https://www.uncg.edu/accolade
-    label: Accolade
+    label: "Accolade"
   - url: https://www.uncg.edu/alumni-2
-    label: Alumni 2
+    label: "Alumni 2"
   - url: https://www.uncg.edu/alumni-giving
-    label: Alumni Giving
+    label: "Alumni Giving"
   - url: https://www.uncg.edu/arts-culture
-    label: Arts Culture
+    label: "Arts Culture"
   - url: https://www.uncg.edu/author
-    label: Author
+    label: "Author"
   - url: https://www.uncg.edu/campus-life
-    label: Campus Life
+    label: "Campus Life"
   - url: https://www.uncg.edu/campus-weekly
-    label: Campus Weekly
+    label: "Campus Weekly"
   - url: https://www.uncg.edu/community-connections
-    label: Community Connections
+    label: "Community Connections"
   - url: https://www.uncg.edu/community-partners
-    label: Community Partners
+    label: "Community Partners"
   - url: https://www.uncg.edu/directory
-    label: Directory
+    label: "Directory"
   - url: https://www.uncg.edu/employees
-    label: Employees
+    label: "Employees"
   - url: https://www.uncg.edu/esports
-    label: Esports
+    label: "Esports"
   - url: https://www.uncg.edu/event
-    label: Event
+    label: "Event"
   - url: https://www.uncg.edu/events
-    label: Events
+    label: "Events"
   - url: https://www.uncg.edu/faculty-staff
-    label: Faculty Staff
+    label: "Faculty Staff"
   - url: https://www.uncg.edu/featured
-    label: Featured
+    label: "Featured"
   - url: https://www.uncg.edu/higher-education-emergency-relief-fund-reporting
-    label: Higher Education Emergency Relief Fund Reporting
+    label: "Higher Education Emergency Relief Fund Reporting"
   - url: https://www.uncg.edu/media
-    label: Media
+    label: "Media"
   - url: https://www.uncg.edu/military-affiliated
-    label: Military Affiliated
+    label: "Military Affiliated"
   - url: https://www.uncg.edu/news
-    label: News
+    label: "News"
   - url: https://www.uncg.edu/newsnotes
-    label: Newsnotes
+    label: "Newsnotes"
   - url: https://www.uncg.edu/organizer
-    label: Organizer
+    label: "Organizer"
   - url: https://www.uncg.edu/people
-    label: People
+    label: "People"
   - url: https://www.uncg.edu/racial-equity
-    label: Racial Equity
+    label: "Racial Equity"
   - url: https://www.uncg.edu/research
-    label: Research
+    label: "Research"
   - url: https://www.uncg.edu/series
-    label: Series
+    label: "Series"
   - url: https://www.uncg.edu/service
-    label: Service
+    label: "Service"
   - url: https://www.uncg.edu/uncategorized
-    label: Uncategorized
+    label: "Uncategorized"
   - url: https://www.uncg.edu/venue
-    label: Venue
+    label: "Venue"
 
 excluded:
   - url: https://admissions.uncg.edu/amazon-career-choice/
