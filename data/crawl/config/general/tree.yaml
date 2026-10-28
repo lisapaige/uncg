@@ -187,7 +187,6 @@ crawl_groups:
     resource_kind: page
     offspring:
       - "about"
-      - "home"
       - "research"
       - "student-resources"
       - "unc-greensboro-school-of-nursing-dean-debra-j-barksdale-assumes-the-presidency-of-the-american-academy-of-nursing"
@@ -1190,3 +1189,6 @@ excluded:
   - url: https://www.uncg.edu/wprss_feed_categories/
     match: prefix
     reason: out-of-scope (scope review 2026-10-28)
+  - url: https://nursing.uncg.edu/home
+    reason: superseded
+    note: redirects to https://nursing.uncg.edu, kept as the portal entry
